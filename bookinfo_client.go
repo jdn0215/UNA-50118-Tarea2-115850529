@@ -47,7 +47,39 @@ func main() {
 	}else{
 		_, err := c.GetBook(ctx, &pb.BookID{Value: r.Value})
 		if err != nil {
-			log.Printf("Libro ya no pudo ser encontrado porque se borró exitosamente: %v", err)
+			log.Printf("***Libro ya no pudo ser encontrado porque se borró exitosamente: %v***", err)
 		}
+	}
+	fmt.Println("\n\n*************Ejericio #2 Actualización**************************")
+	r, err = c.AddBook(ctx, &pb.Book{
+        Id:        "1",
+        Title:     "Operating System Concepts",
+        Edition:   "9th",
+        Copyright: "2012",
+        Language:  "ENGLISH",
+        Pages:     "976",
+        Author:    "Abraham Silberschatz",
+        Publisher: "John Wiley & Sons"})
+    if err != nil {
+        log.Fatalf("Could not add book: %v", err)
+	}
+	book, err = c.GetBook(ctx, &pb.BookID{Value: r.Value})
+	fmt.Println("*************Se vuelve a añadir el libro para modificarlo ",book.Id)
+	fmt.Println(book)
+	fmt.Println("*************Modificando libro ",book.Id,", " , book.Title,"....")
+	book, err = c.UpdateBook(ctx, &pb.Book{
+        Id:        book.Id,
+        Title:     "Conceptos de sistemas operativos",
+        Edition:   book.Edition,
+        Copyright: "2020",
+        Language:  "SPANISH",
+        Pages:     "1000",
+        Author:    book.Author,
+		Publisher: "J&D"});
+	if err != nil {
+		log.Fatalf("Could not update book: %v ", err)
+	}else{
+		fmt.Println("*************Libro modificado ",book.Id);	
+		fmt.Println(book)
 	}
 }

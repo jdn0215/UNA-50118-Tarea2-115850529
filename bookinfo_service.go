@@ -34,14 +34,26 @@ func (s *server) GetBook(ctx context.Context, in *pb.BookID) (*pb.Book, error) {
     }
     return nil, status.Errorf(codes.NotFound, "Book does not exist.", in.Value)
 }
-
+/****Ejercicio #1 *************/
 func (s * server) DeleteBook(ctx context.Context, in *pb.BookID) (*pb.BookID,error){
 	_, exists := s.bookMap[in.Value];
 	if !exists{
-		return nil,status.Errorf(codes.NotFound,"Bool does not exist.",in.Value);
+		return nil,status.Errorf(codes.NotFound,"Book does not exist.",in.Value);
 	}
 	fmt.Println("Libro encontrado...")
 	delete(s.bookMap,in.Value)
 	fmt.Println("Libro borrado exitosamente")
 	return in, status.New(codes.OK, "").Err();
+}
+
+/*** Ejericio #2 ********************/
+func (s * server) UpdateBook(ctx context.Context, in *pb.Book) (*pb.Book,error){
+	_, exists := s.bookMap[in.Id];
+	if !exists{
+		fmt.Println("Libro no encontrado: ",in.Id,s.bookMap)
+		return in,status.Errorf(codes.NotFound,"Book does not exist.",in.Id);
+	}
+	s.bookMap[in.Id] = in
+	fmt.Println("Libro actualizado exitosamente")
+	return in,nil;
 }
