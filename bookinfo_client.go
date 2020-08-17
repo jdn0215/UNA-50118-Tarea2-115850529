@@ -2,7 +2,7 @@ package main
 
 import (
     "context"
-    pb "github.com/arce/gowebservices/booksapp"
+    pb "github.com/jdn0215/UNA-50118-Tarea2-115850529/booksapp"
     "google.golang.org/grpc"
     "log"
     "os"
