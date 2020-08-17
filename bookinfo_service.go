@@ -2,7 +2,7 @@ package main
 
 import (
     "context"
-    pb "github.com/jdn0215/UNA-50118-Tarea2-115850529/booksapp/"
+    pb "github.com/jdn0215/UNA-50118-Tarea2-115850529/booksapp"
     "github.com/gofrs/uuid"
     "google.golang.org/grpc/codes"
     "google.golang.org/grpc/status"
