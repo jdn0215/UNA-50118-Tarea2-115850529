@@ -6,7 +6,8 @@ import (
     "google.golang.org/grpc"
     "log"
     "os"
-    "time"
+	"time"
+	"fmt"
 )
 
 func main() {
@@ -38,5 +39,15 @@ func main() {
     if err != nil {
         log.Fatalf("Could not get book: %v", err)
     }
-    log.Printf("Book: ", book.String())
+	fmt.Println("*************Ejericio #1 Borrado**************************")
+	fmt.Println("*************Borrando libro ",book.Id,", " , book.Title,"....")
+	r, err = c.DeleteBook(ctx,&pb.BookID{Value: r.Value}); 
+	if err != nil{
+		log.Fatalf("Could not add book: %v", err)
+	}else{
+		_, err := c.GetBook(ctx, &pb.BookID{Value: r.Value})
+		if err != nil {
+			log.Printf("Libro ya no pudo ser encontrado porque se borró exitosamente: %v", err)
+		}
+	}
 }

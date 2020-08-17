@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
     "context"
     pb "github.com/jdn0215/UNA-50118-Tarea2-115850529/booksapp"
     "github.com/gofrs/uuid"
@@ -27,9 +28,20 @@ func (s *server) AddBook(ctx context.Context, in *pb.Book) (*pb.BookID, error) {
 }
 
 func (s *server) GetBook(ctx context.Context, in *pb.BookID) (*pb.Book, error) {
-    value, exists := s.bookMap[in.Value]
+	value, exists := s.bookMap[in.Value]
     if exists {
         return value, status.New(codes.OK, "").Err()
     }
     return nil, status.Errorf(codes.NotFound, "Book does not exist.", in.Value)
+}
+
+func (s * server) DeleteBook(ctx context.Context, in *pb.BookID) (*pb.BookID,error){
+	_, exists := s.bookMap[in.Value];
+	if !exists{
+		return nil,status.Errorf(codes.NotFound,"Bool does not exist.",in.Value);
+	}
+	fmt.Println("Libro encontrado...")
+	delete(s.bookMap,in.Value)
+	fmt.Println("Libro borrado exitosamente")
+	return in, status.New(codes.OK, "").Err();
 }
