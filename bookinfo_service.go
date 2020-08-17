@@ -57,3 +57,15 @@ func (s * server) UpdateBook(ctx context.Context, in *pb.Book) (*pb.Book,error){
 	fmt.Println("Libro actualizado exitosamente")
 	return in,nil;
 }
+/*** Ejericio #3 ********************/
+func (s * server) GetAll(ctx context.Context, n *pb.Nil) (*pb.ArrayBook,error){
+ result := &pb.ArrayBook{};
+ fmt.Println("++++")
+ fmt.Println(result.Books)
+ fmt.Println("++++")
+ for _, v := range s.bookMap { 
+    result.Books = append(result.Books,v);
+ }  
+ return result,nil;
+}
+	

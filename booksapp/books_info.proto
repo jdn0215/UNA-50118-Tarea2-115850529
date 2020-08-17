@@ -6,8 +6,16 @@ service BookInfo {
   rpc getBook(BookID) returns (Book);
   rpc deleteBook(BookID) returns (BookID);
   rpc updateBook(Book) returns (Book);
+  rpc getAll (Nil) returns (ArrayBook);
 }
 
+message Nil{
+  
+}
+
+message ArrayBook{
+  repeated Book books = 1;
+}
 message Book {
   string Id = 1;
   string Title = 2;
