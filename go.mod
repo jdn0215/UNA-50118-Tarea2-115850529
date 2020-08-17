@@ -1,4 +1,4 @@
-module github.com/jd0215/UNA-50118-Tarea1-115850529
+module github.com/jd0215/UNA-50118-Tarea2-115850529
 
 require (
 	github.com/gofrs/uuid v3.3.0+incompatible // indirect

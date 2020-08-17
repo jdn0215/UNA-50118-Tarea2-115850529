@@ -1,7 +1,7 @@
 package main
 
 import (
-    pb "github.com/arce/UNA-50118-Tarea2-115850529/booksapp/"
+    pb "github.com/jdn0215/UNA-50118-Tarea2-115850529/booksapp/"
     "google.golang.org/grpc"
     "log"
     "net"
